@@ -1,0 +1,48 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col{
+    flex-direction: column;
+}
+
+.flex-ali{
+    align-items: center;
+}
+
+body {
+    text-align: center;
+    justify-content: space-around;
+    height: 100vh;
+}
+
+.main-content {
+    gap: 30px;
+}
+
+.name {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.board{
+    width: 40vw;
+    height: 40vw;
+    border: 2px solid black;
+    display: grid;
+    grid-template-columns: repeat(10,1fr);
+}
+
+.board div{
+    border: 2px solid gray;
+}
+
+.board div:hover{
+    background-color: grey;
+}
