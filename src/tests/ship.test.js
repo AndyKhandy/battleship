@@ -1,4 +1,4 @@
-import Ship from "../modules/ship.js";
+import Ship from "../modules/CLASSES/ship";
 
 let newShip;
 
@@ -23,6 +23,6 @@ describe("Testing functions of ship", () => {
 
   test("tests isSunk() on a 1 length ship that is hit", () => {
     newShip.hit();
-    expect(newShip.isSunk).toBeTruthy();
+    expect(newShip.isSunk()).toBeTruthy();
   });
 });

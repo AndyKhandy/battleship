@@ -1,5 +1,5 @@
-import Gameboard from "../modules/gameboard";
-import Ship from "../modules/ship";
+import Gameboard from "../modules/CLASSES/gameboard";
+import Ship from "../modules/CLASSES/ship";
 
 let playerBoard;
 

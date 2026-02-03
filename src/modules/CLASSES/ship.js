@@ -3,7 +3,7 @@ export default class Ship
     constructor(length){
         this.length = length;
         this.hits = 0;
-        this.sunked = false;
+        this.sunk = false;
     }
 
     hit()
