@@ -1,8 +1,7 @@
 
-export default function createBoard(isComputer, attackFunction)
+export default function createBoard(name, attackFunction)
 {
-    let DOMboard = isComputer ? "computer" : "player";
-    let board = document.querySelector(`#${DOMboard}-board`);
+    let board = document.querySelector(`#${name}-board`);
 
     for(let x = 0; x < 10; x++)
     {
@@ -11,7 +10,8 @@ export default function createBoard(isComputer, attackFunction)
             let coordinateDiv = document.createElement("div");
             coordinateDiv.dataset.x = x;
             coordinateDiv.dataset.y = y;
-            coordinateDiv.classList.add(DOMboard);
+            coordinateDiv.classList.add(name, "no-hit");
+            coordinateDiv.textContent = "o";
 
             coordinateDiv.addEventListener("click", ()=>{
                 //send the div reference to send to another DOM function to change

@@ -40,9 +40,26 @@ body {
 }
 
 .board div{
+    display: grid;
+    place-items: center;
     border: 2px solid gray;
+    font-size: 30px;
+    padding: 0px;
+    background-color: var(--hit-indicator);
+}
+
+.board div.no-hit{
+    opacity: 0.5
 }
 
 .board div:hover{
     background-color: grey;
+}
+
+.miss {
+    --hit-indicator: red;
+}
+
+.hit{
+    --hit-indicator: blue;
 }

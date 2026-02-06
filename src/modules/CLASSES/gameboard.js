@@ -1,4 +1,14 @@
+import Ship from "./ship";
+const SHIPS = [
+      new Ship(5, "Carrier"),
+      new Ship(4, "Battleship"),
+      new Ship(3, "Cruiser"),
+      new Ship(3, "Submarine"),
+      new Ship(2, "Destroyer")
+    ];
+
 export default class Gameboard {
+
   constructor() {
     this.ships = [];
     this.missedShots = new Set();
