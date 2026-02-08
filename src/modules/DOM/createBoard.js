@@ -1,7 +1,7 @@
 
-export default function createBoard(name, attackFunction)
+export default function createBoard(playerObject, attackFunction)
 {
-    let board = document.querySelector(`#${name}-board`);
+    let board = document.querySelector(`#${playerObject.name}-board`);
 
     for(let x = 0; x < 10; x++)
     {
@@ -10,7 +10,11 @@ export default function createBoard(name, attackFunction)
             let coordinateDiv = document.createElement("div");
             coordinateDiv.dataset.x = x;
             coordinateDiv.dataset.y = y;
-            coordinateDiv.classList.add(name, "no-hit");
+            coordinateDiv.classList.add(playerObject.name, "no-hit");
+            if(playerObject.name === "player" && playerObject.gameboard.board[x][y])
+            {
+                coordinateDiv.classList.add("visible");
+            }
             coordinateDiv.textContent = "o";
 
             coordinateDiv.addEventListener("click", ()=>{

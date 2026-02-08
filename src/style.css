@@ -60,6 +60,10 @@ body {
     --hit-indicator: red;
 }
 
-.hit{
+.hit, .visible{
     --hit-indicator: blue;
+}
+
+.sunk {
+    --hit-indicator: purple;
 }
