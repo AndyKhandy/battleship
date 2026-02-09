@@ -5,4 +5,10 @@ export default class Player {
     this.gameboard = new Gameboard();
     this.name = name;
   }
+
+  computerRandomMove() {
+      let xAttack = Math.floor(Math.random() * 10);
+      let yAttack = Math.floor(Math.random() * 10);
+      return [xAttack,yAttack];
+    }
 }

@@ -44,7 +44,7 @@ export default class Gameboard {
   receiveAttack([x, y]) {
     let coordinates = `${x},${y}`;
     if (this.missedShots.has(coordinates) || this.board[x][y]?.alreadyHit) {
-      return null;
+      return false;
     } else {
       if (!this.board[x][y]) {
         this.missedShots.add(coordinates);
@@ -58,11 +58,20 @@ export default class Gameboard {
         */
         this.board[x][y].ship.hit();
         this.board[x][y].alreadyHit = true;
-        if (this.board[x][y].ship.isSunk()) {
-          return this.board[x][y].ship.coordinates;
-        }
       }
+    }
+    return true;
+  }
+
+  shipSunkAtCoords([x,y])
+  {
+    if(this.board[x][y] == null)
+    {
       return null;
+    }
+    else if(this.board[x][y].ship.isSunk())
+    {
+      return this.board[x][y].ship.coordinates;
     }
   }
 
