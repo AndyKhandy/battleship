@@ -3,6 +3,8 @@ export default function createBoard(playerObject, attackFunction)
 {
     let board = document.querySelector(`#${playerObject.name}-board`);
 
+    board.innerHTML = "";
+
     for(let x = 0; x < 10; x++)
     {
         for(let y = 0; y < 10; y++)
@@ -11,7 +13,7 @@ export default function createBoard(playerObject, attackFunction)
             coordinateDiv.dataset.x = x;
             coordinateDiv.dataset.y = y;
             coordinateDiv.classList.add(playerObject.name, "no-hit");
-            if(playerObject.name === "player" && playerObject.gameboard.board[x][y])
+            if(playerObject.gameboard.board[x][y])
             {
                 coordinateDiv.classList.add("visible");
             }

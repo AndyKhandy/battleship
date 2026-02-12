@@ -22,7 +22,16 @@ body {
     height: 100vh;
 }
 
-.main-content {
+
+/*DIALOG SECTION*/
+dialog {
+    width: 30vw;
+    height: 25vw;
+    margin: auto;
+    z-index: 9999;
+}
+
+.main-content, .boards-section {
     gap: 30px;
 }
 
@@ -32,8 +41,8 @@ body {
 }
 
 .board{
-    width: 40vw;
-    height: 40vw;
+    width: 30vw;
+    height: 30vw;
     border: 2px solid black;
     display: grid;
     grid-template-columns: repeat(10,1fr);

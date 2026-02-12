@@ -6,10 +6,17 @@
     <title>Battleship</title>
   </head>
   <body class="flex flex-col flex-ali">
-    <h1>BATTLESHIP</h1>
-    <div class="main-content flex">
+    <dialog id="game-winner">
+      <p>Computer has won!</p>
+      <h1 id="player-hits">Player hits connected: 50</h1>
+      <h1 id="computer-hits">Computer hits connected: 60</h1>
+    </dialog>
 
-      <div class="player-section">
+    <h1>BATTLESHIP</h1>
+    <div class="main-content flex flex-col">
+
+      <div class="boards-section flex">
+        <div class="player-section">
         <div id="player-name" class="name">
           <h2>Player</h2>
         </div>
@@ -25,6 +32,12 @@
         <div class="board" id="computer-board">
 
         </div>
+      </div>
+      </div>
+
+      <div class="start-buttons">
+        <button id="randomize-board">Randomize Board</button>
+        <button id="start-game">Start Game</button>
       </div>
 
     </div>

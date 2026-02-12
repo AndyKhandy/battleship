@@ -63,6 +63,11 @@ export default class Gameboard {
     return true;
   }
 
+  isShip([x,y])
+  {
+    return this.board[x][y] != null;
+  }
+
   shipSunkAtCoords([x,y])
   {
     if(this.board[x][y] == null)
@@ -73,6 +78,22 @@ export default class Gameboard {
     {
       return this.board[x][y].ship.coordinates;
     }
+  }
+
+  resetBoard()
+  {
+    this.board = [
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+    ];
   }
 
   randomizeBoard() {

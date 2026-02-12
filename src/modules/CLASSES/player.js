@@ -4,11 +4,11 @@ export default class Player {
   constructor(name) {
     this.gameboard = new Gameboard();
     this.name = name;
+    this.shipGridsHit = 0;
   }
 
-  computerRandomMove() {
-      let xAttack = Math.floor(Math.random() * 10);
-      let yAttack = Math.floor(Math.random() * 10);
-      return [xAttack,yAttack];
-    }
+  shipSquareHit()
+  {
+    this.shipGridsHit++;
+  }
 }
