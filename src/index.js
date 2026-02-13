@@ -6,10 +6,11 @@ import createBoard from "./modules/DOM/createBoard";
 import renderAttack from "./modules/DOM/renderAttack";
 import renderSunkShip from "./modules/DOM/renderSunkShip";
 import { displayWinner } from "./modules/DOM/displayWinner";
+import { displayAbilities } from "./modules/CLASSES/displayAbilities";
 
 const randomizeBtn = document.querySelector("#randomize-board");
 const startBtn = document.querySelector("#start-game");
-const buttons = document.querySelector(".start-buttons");
+const startButtons = document.querySelector(".start-buttons");
 
 const player = new Player("player", false);
 const computer = new Player("computer", true);
@@ -27,7 +28,8 @@ randomizeBtn.addEventListener("click", () => {
 });
 
 startBtn.addEventListener("click", () => {
-  buttons.style.display = "none";
+  startButtons.style.visibility = "hidden";
+  displayAbilities();
   gameStart = true;
 });
 

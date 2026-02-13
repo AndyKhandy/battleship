@@ -15,7 +15,13 @@ export default function createBoard(playerObject, attackFunction)
             coordinateDiv.classList.add(playerObject.name, "no-hit");
             if(playerObject.gameboard.board[x][y])
             {
-                coordinateDiv.classList.add("visible");
+                if(playerObject.name == "computer")
+                {
+                    coordinateDiv.classList.add("ability-visible");
+                }
+                else{
+                    coordinateDiv.classList.add("visible");
+                }
             }
             coordinateDiv.textContent = "o";
 

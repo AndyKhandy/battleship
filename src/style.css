@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+:root{
+    --hit-indicator: white;
+}
+
 .flex {
     display: flex;
 }
@@ -18,10 +22,15 @@
 
 body {
     text-align: center;
-    justify-content: space-around;
     height: 100vh;
+    background-image: url(".//img/favicon.png");
+    background-size: cover;
+    justify-content: space-between;
 }
 
+.title {
+    margin-top: 5vh;
+}
 
 /*DIALOG SECTION*/
 dialog {
@@ -31,8 +40,39 @@ dialog {
     z-index: 9999;
 }
 
-.main-content, .boards-section {
+.main-content{
+    padding: 30px;
+    height: 100%;
+    justify-content: center;
+    gap: 60px;
+}
+
+.boards-section, .start-buttons {
     gap: 30px;
+}
+
+button, .board div {
+    cursor: pointer;
+}
+
+.start-buttons{
+    justify-content: center;
+}
+
+.start-buttons button{
+    background-color: white;
+    border: 2px solid black;
+    padding: 10px;
+    width: 150px;
+    border-radius: 10px;
+    font-weight: bolder;
+    transition: 300ms;
+}
+
+.start-buttons button:hover{
+    background-color: blue;
+    color: white;
+    transform: scale(1.1);
 }
 
 .name {
@@ -58,21 +98,52 @@ dialog {
 }
 
 .board div.no-hit{
-    opacity: 0.5
+    opacity: 0.9;
 }
 
-.board div:hover{
-    background-color: grey;
-}
 
-.miss {
+.board div:hover, .miss{
+    --hit-indicator: grey;
+}
+#computer-board.active .ability-visible{
     --hit-indicator: red;
 }
 
-.hit, .visible{
+
+.hit, .visible {
     --hit-indicator: blue;
 }
 
 .sunk {
     --hit-indicator: purple;
+}
+
+.player-section, .computer-section {
+    position: relative;
+}
+
+.player-section.game, .computer-section.game {
+    padding-bottom: 60px;
+}
+
+#fire-ability, #water-ability {
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    visibility: hidden;
+}
+
+.game #fire-ability, .game #water-ability {
+    visibility: visible;
+}
+
+#fire-ability{
+    background-image: url("./img/fire-ability.webp");
+}
+
+#water-ability{
+    background-image: url("./img/water-ability.webp")
 }

@@ -6,6 +6,13 @@ export default function renderAttack(player,[x,y],div)
         div.classList.add("miss");
     }
     else{
+        if(player.name == "player")
+        {
+            div.textContent = "🔥";
+        }
+        else{
+            div.textContent = "🌊"
+        }
         div.classList.add("hit");
     }
     div.classList.remove("no-hit");
