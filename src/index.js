@@ -7,13 +7,15 @@ import renderAttack from "./modules/DOM/renderAttack";
 import renderSunkShip from "./modules/DOM/renderSunkShip";
 import { displayWinner } from "./modules/DOM/displayWinner";
 import { displayAbilities } from "./modules/CLASSES/displayAbilities";
+import displayLogMessage from "./modules/DOM/displayLogMessage";
 
 const randomizeBtn = document.querySelector("#randomize-board");
 const startBtn = document.querySelector("#start-game");
 const startButtons = document.querySelector(".start-buttons");
+const log = document.querySelector(".log-attack")
 
-const player = new Player("player", false);
-const computer = new Player("computer", true);
+const player = new Player("water-tribe", false);
+const computer = new Player("fire-nation", true);
 
 let gameOver = false;
 let gameStart = false;
@@ -28,7 +30,8 @@ randomizeBtn.addEventListener("click", () => {
 });
 
 startBtn.addEventListener("click", () => {
-  startButtons.style.visibility = "hidden";
+  startButtons.classList.add("hide");
+  log.classList.add("show");
   displayAbilities();
   gameStart = true;
 });
@@ -38,7 +41,8 @@ function displayRandomizeBoard(playerObject) {
   createBoard(playerObject, attackFunction);
 }
 
-function attackFunction([x, y], div) {
+async function attackFunction([x, y], div) {
+  let attacker = currentPlayer.name == "water-tribe"? "water-tribe" : "fire-nation";
   if (!validMove(div)) {
     return;
   }
@@ -46,16 +50,24 @@ function attackFunction([x, y], div) {
 
   if (attackActivated) {
     renderAttack(currentPlayer, [x, y], div);
-
     if (currentPlayer.gameboard.isShip([x, y])) {
       currentPlayer.shipSquareHit();
       let shipSunkCoords = currentPlayer.gameboard.shipSunkAtCoords([x, y]);
       if (shipSunkCoords != null) {
         renderSunkShip(currentPlayer.name, shipSunkCoords);
+        await displayLogMessage(attacker,true, true, [x,y]);
         checkWinner();
       }
+      else{
+       await displayLogMessage(attacker,true, false, [x,y]);
+      }
     }
-    runComputerAttack();
+    else{
+      await displayLogMessage(attacker,false, false, [x,y]);
+    }
+    //give the type writter time to write out the full sentence
+
+    await runComputerAttack();
   } else {
     //needed if the the player pressed on a grid that already was hit/missed on
     //allows player to try again
@@ -81,7 +93,7 @@ function computerRandomMove() {
   return move;
 }
 
-function computerAttack() {
+async function computerAttack() {
   if (gameOver) {
     return;
   }
@@ -90,15 +102,16 @@ function computerAttack() {
   let [xMove, yMove] = move;
 
   const playerGridDiv = document.querySelector(
-    `.player[data-x="${xMove}"][data-y="${yMove}"]`,
+    `.water-tribe[data-x="${xMove}"][data-y="${yMove}"]`,
   );
 
-  attackFunction([xMove, yMove], playerGridDiv);
+  await attackFunction([xMove, yMove], playerGridDiv);
 }
 
-function runComputerAttack() {
+async function runComputerAttack() {
   if (currentPlayer === computer && !gameOver) {
-    setTimeout(computerAttack, 500);
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    await computerAttack();
   }
 }
 

@@ -55,8 +55,33 @@ button, .board div {
     cursor: pointer;
 }
 
+.log-attack{
+    display: none;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: left;
+    width: 75%;
+    margin:auto;
+    outline: 4px solid rgba(20, 147, 245, 0.47);
+    border: 2px solid black;
+}
+
+.log-attack.show{
+    display: block;
+}
+
+.log-attack p{
+    text-transform: uppercase;
+    font-weight: bolder;
+}
+
 .start-buttons{
     justify-content: center;
+}
+
+.start-buttons.hide{
+    display: none;
 }
 
 .start-buttons button{
@@ -105,12 +130,13 @@ button, .board div {
 .board div:hover, .miss{
     --hit-indicator: grey;
 }
-#computer-board.active .ability-visible{
+
+#fire-nation-board.active .ability-visible, .ability-visible.hit{
     --hit-indicator: red;
 }
 
 
-.hit, .visible {
+.visible {
     --hit-indicator: blue;
 }
 
@@ -123,7 +149,7 @@ button, .board div {
 }
 
 .player-section.game, .computer-section.game {
-    padding-bottom: 60px;
+    padding-bottom: 20px;
 }
 
 #fire-ability, #water-ability {
@@ -131,13 +157,14 @@ button, .board div {
     width: 50px;
     height: 50px;
     position: absolute;
-    bottom: 0px;
+    bottom: -7%;
     left: 0px;
     visibility: hidden;
 }
 
 .game #fire-ability, .game #water-ability {
     visibility: visible;
+    opacity: 0.5;
 }
 
 #fire-ability{

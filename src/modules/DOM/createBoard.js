@@ -15,7 +15,7 @@ export default function createBoard(playerObject, attackFunction)
             coordinateDiv.classList.add(playerObject.name, "no-hit");
             if(playerObject.gameboard.board[x][y])
             {
-                if(playerObject.name == "computer")
+                if(playerObject.name == "fire-nation")
                 {
                     coordinateDiv.classList.add("ability-visible");
                 }
