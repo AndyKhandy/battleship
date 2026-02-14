@@ -4,42 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Battleship Avatar Edition</title>
-    <link rel="shortcut icon" href="img/favicon2.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="img/favicon2.jpg" type="image/x-icon" />
   </head>
   <body class="flex flex-col flex-ali">
     <dialog id="game-winner">
-      <p>Computer has won!</p>
-      <h1 id="player-hits">Player hits connected: 50</h1>
-      <h1 id="computer-hits">Computer hits connected: 60</h1>
+      <h1>VICTORY!</h1>
+      <div class="main-body flex flex-ali">
+        <div class="stats">
+          <h2>Stats</h2>
+          <h3 id="player-hits">Player hits connected: 50</h3>
+          <h3 id="computer-hits">Computer hits connected: 60</h3>
+        </div>
+        <img src="img/ice-fortress-victory.webp" alt="picture of the ice fortress" />
+      </div>
     </dialog>
 
     <div class="title flex flex-col">
       <h1>BATTLESHIP</h1>
-    <h2>INVASION OF THE FIRE NATION</h2>
+      <h2>INVASION OF THE FIRE NATION</h2>
     </div>
 
     <div class="main-content flex flex-col">
-
       <div class="boards-section flex">
         <div class="player-section section">
-        <div id="player-name" class="name">
-          <h2>Water Tribe</h2>
+          <div id="player-name" class="name">
+            <h2>Water Tribe</h2>
+          </div>
+          <div class="board" id="water-tribe-board"></div>
+          <button id="water-ability" class="abilities" disabled>🔎</button>
         </div>
-        <div class="board" id="water-tribe-board">
-            
-        </div>
-        <button id="water-ability" class="abilities" disabled>🔎</button>
-      </div>
 
-      <div class="computer-section section">
-        <div id="computer-name" class="name">
-          <h2>Fire Nation</h2>
+        <div class="computer-section section">
+          <div id="computer-name" class="name">
+            <h2>Fire Nation</h2>
+          </div>
+          <div class="board active" id="fire-nation-board"></div>
+          <button id="fire-ability" class="abilities" disabled></button>
         </div>
-        <div class="board active" id="fire-nation-board">
-
-        </div>
-        <button id="fire-ability" class="abilities" disabled></button>
-      </div>
       </div>
 
       <div class="log-attack">
@@ -50,7 +51,6 @@
         <button id="randomize-board">Randomize Board</button>
         <button id="start-game">Start Game</button>
       </div>
-
     </div>
   </body>
 </html>

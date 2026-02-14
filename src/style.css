@@ -6,6 +6,9 @@
 
 :root{
     --hit-indicator: white;
+    --winner-main-color: blue;
+    --winner-border-color: rgb(82, 126, 208);
+    --winnner-background-color: rgb(188, 221, 238);
 }
 
 .flex {
@@ -29,22 +32,89 @@ body {
 }
 
 .title {
-    margin-top: 5vh;
+    margin-top: 2vh;
+    color: white;
 }
+
+.title h1 {
+    font-size: 75px;
+    color: rgba(0, 0, 0, 0.612);
+}
+
 
 /*DIALOG SECTION*/
 dialog {
-    width: 30vw;
-    height: 25vw;
-    margin: auto;
-    z-index: 9999;
+    margin: 15% auto;
+    width: max(40%, 400px);
+    height: 350px;
+    padding: 30px;
+    z-index: 999;
+    opacity: 0;
+    border-radius: 10px;
+    border: 10px double var(--winner-border-color);
+    background-color: var(--winnner-background-color);
 }
+
+dialog.fire {
+    --winner-main-color: rgb(161, 3, 3);
+    --winner-border-color: rgb(250, 112, 112);
+    --winnner-background-color: rgb(250, 176, 96);
+}
+
+.main-body, .main-content {
+    justify-content: center;
+    justify-content: center;
+    gap: 45px;
+}
+
+dialog img {
+    margin-top: 10px;
+    width: 200px;
+    height: 150px;
+    top: 0px;
+    right: 0px;
+    border: 5px solid var(--winner-border-color);
+
+}
+
+::backdrop {
+  background-color: rgba(0, 0, 0, 0.4); 
+}
+
+dialog h1{
+    margin: 0px auto 30px auto;
+    position: relative;
+    width: fit-content;
+    color: var(--winner-main-color);
+}
+
+dialog, dialog h1::after{
+    transition: 1000ms;
+}
+
+dialog h1::after {
+    content: "";
+    display: block;
+    background-color: black;
+    width: 0%;
+    height: 2px;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+}
+
+dialog[open] {
+    opacity: 1;
+}
+
+dialog[open] h1::after{
+    width: 100%;
+}
+
 
 .main-content{
     padding: 30px;
     height: 100%;
-    justify-content: center;
-    gap: 60px;
 }
 
 .boards-section, .start-buttons {
@@ -105,6 +175,14 @@ button, .board div {
     margin-bottom: 20px;
 }
 
+#computer-name h2 {
+    color: rgb(255, 1, 1);
+}
+
+#player-name h2 {
+    color: rgb(0, 221, 255);
+}
+
 .board{
     width: 30vw;
     height: 30vw;
@@ -149,7 +227,7 @@ button, .board div {
 }
 
 .player-section.game, .computer-section.game {
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 
 #fire-ability, #water-ability {
@@ -157,7 +235,7 @@ button, .board div {
     width: 50px;
     height: 50px;
     position: absolute;
-    bottom: -7%;
+    bottom: -8%;
     left: 0px;
     visibility: hidden;
 }
