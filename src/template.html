@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Battleship Avatar Edition</title>
     <link rel="shortcut icon" href="img/favicon2.jpg" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body class="flex flex-col flex-ali">
     <dialog id="game-winner">
@@ -15,7 +21,10 @@
           <h3 id="player-hits">Player hits connected: 50</h3>
           <h3 id="computer-hits">Computer hits connected: 60</h3>
         </div>
-        <img src="img/ice-fortress-victory.webp" alt="picture of the ice fortress" />
+        <img
+          src="img/ice-fortress-victory.webp"
+          alt="picture of the ice fortress"
+        />
       </div>
     </dialog>
 
@@ -31,15 +40,15 @@
             <h2>Water Tribe</h2>
           </div>
           <div class="board" id="water-tribe-board"></div>
-          <button id="water-ability" class="abilities" disabled>🔎</button>
+          <button id="water-ability" class="abilities" >🔎</button>
         </div>
 
         <div class="computer-section section">
           <div id="computer-name" class="name">
             <h2>Fire Nation</h2>
           </div>
-          <div class="board active" id="fire-nation-board"></div>
-          <button id="fire-ability" class="abilities" disabled></button>
+          <div class="board" id="fire-nation-board"></div>
+          <button id="fire-ability" class="abilities" ></button>
         </div>
       </div>
 

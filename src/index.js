@@ -8,14 +8,18 @@ import renderSunkShip from "./modules/DOM/renderSunkShip";
 import { displayWinner } from "./modules/DOM/displayWinner";
 import { displayAbilities } from "./modules/CLASSES/displayAbilities";
 import displayLogMessage from "./modules/DOM/displayLogMessage";
+import { changeAbilityBtnOpacity } from "./modules/DOM/ability";
+import moonlightAbility from "./modules/DOM/moonlightAbility";
 
 const randomizeBtn = document.querySelector("#randomize-board");
 const startBtn = document.querySelector("#start-game");
 const startButtons = document.querySelector(".start-buttons");
-const log = document.querySelector(".log-attack")
+const log = document.querySelector(".log-attack");
+const moonlightAbilityBtn = document.querySelector("#water-ability");
+const cometAbilityBtn = document.querySelector("#fire-ability");
 
-const player = new Player("water-tribe", false);
-const computer = new Player("fire-nation", true);
+const player = new Player("water-tribe");
+const computer = new Player("fire-nation", "Sozin's Comet");
 
 let gameOver = false;
 let gameStart = false;
@@ -36,13 +40,42 @@ startBtn.addEventListener("click", () => {
   gameStart = true;
 });
 
+moonlightAbilityBtn.addEventListener("click", (e) => {
+  useAbility(player, e.target);
+});
+
 function displayRandomizeBoard(playerObject) {
   playerObject.gameboard.randomizeBoard();
   createBoard(playerObject, attackFunction);
 }
 
+function useAbility(attacker, button) {
+  if (attacker == currentPlayer && attacker.canUseAbility()) {
+    activateAbility(attacker.name, attacker.abilityName);
+    changeAbilityBtnOpacity(button, 0);
+    attacker.abilityMissedShots = 0;
+    return true;
+  }
+  return false;
+}
+
+async function activateAbility(attackerName, abilityName) {
+  await displayLogMessage(attackerName, false, false, [0, 0], abilityName);
+  await new Promise((resolve) => {
+    setTimeout(() => {
+      resolve("done");
+    }, 1000);
+  });
+
+  if (abilityName == "Moonlight's Shimmer") {
+    await moonlightAbility();
+  } else {
+    await sozinComet();
+  }
+}
+
 async function attackFunction([x, y], div) {
-  let attacker = currentPlayer.name == "water-tribe"? "water-tribe" : "fire-nation";
+  let attacker = currentPlayer.name == "water-tribe" ? player : computer;
   if (!validMove(div)) {
     return;
   }
@@ -55,15 +88,24 @@ async function attackFunction([x, y], div) {
       let shipSunkCoords = currentPlayer.gameboard.shipSunkAtCoords([x, y]);
       if (shipSunkCoords != null) {
         renderSunkShip(currentPlayer.name, shipSunkCoords);
-        await displayLogMessage(attacker,true, true, [x,y]);
+        await displayLogMessage(attacker, true, true, [x, y]);
         checkWinner();
+      } else {
+        await displayLogMessage(attacker.name, true, false, [x, y]);
       }
-      else{
-       await displayLogMessage(attacker,true, false, [x,y]);
+    } else {
+      let button = getButtonName(attacker.name);
+      let opacity = window.getComputedStyle(button).getPropertyValue("opacity");
+      attacker.numMissedShots++;
+      attacker.abilityMissedShots++;
+      if (attacker.abilityMissedShots > 4) {
+        attacker.abilityMissedShots = 4;
       }
-    }
-    else{
-      await displayLogMessage(attacker,false, false, [x,y]);
+      if (opacity != 1) {
+        changeAbilityBtnOpacity(button, attacker.abilityMissedShots);
+      }
+      attacker.numMissedShots++;
+      await displayLogMessage(attacker.name, false, false, [x, y]);
     }
     //give the type writter time to write out the full sentence
 
@@ -73,6 +115,33 @@ async function attackFunction([x, y], div) {
     //allows player to try again
     switchPlayer();
   }
+}
+
+async function sozinComet() {
+  //fire-nation fires 3 total times
+  for (let i = 0; i < 2; i++) {
+    await computerAttack();
+    switchPlayer();
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve("done");
+      }, 1000);
+    });
+  }
+  await computerAttack();
+  //ensures that the missed shots from sozin's comet doesn't shorten the ability cooldown
+  computer.abilityMissedShots = 0;
+  changeAbilityBtnOpacity(cometAbilityBtn,0);
+}
+
+function getButtonName(attackerName) {
+  let buttonName = "";
+  if (attackerName == "water-tribe") {
+    buttonName = "water";
+  } else {
+    buttonName = "fire";
+  }
+  return document.querySelector(`#${buttonName}-ability`);
 }
 
 computer.availableMoves = [];
@@ -110,8 +179,10 @@ async function computerAttack() {
 
 async function runComputerAttack() {
   if (currentPlayer === computer && !gameOver) {
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    await computerAttack();
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    if (!useAbility(computer, cometAbilityBtn)) {
+      await computerAttack();
+    }
   }
 }
 
@@ -136,9 +207,14 @@ function checkWinner() {
     //ex) sunk all ships on player-board (or currentPlayer.gameboard.board) which
     //means switchPlayer() so that the current player is computer
     switchPlayer();
-    let otherShipsHit = currentPlayer == player ? computer.shipGridsHit : player.shipGridsHit;
+    let otherShipsHit =
+      currentPlayer == player ? computer.shipGridsHit : player.shipGridsHit;
 
-    displayWinner(currentPlayer.name, currentPlayer.shipGridsHit, otherShipsHit);
+    displayWinner(
+      currentPlayer.name,
+      currentPlayer.shipGridsHit,
+      otherShipsHit,
+    );
     gameOver = true;
   }
 }

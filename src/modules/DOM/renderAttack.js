@@ -12,8 +12,8 @@ export default function renderAttack(player,[x,y],div)
         }
         else{
             div.textContent = "🌊"
-            div.classList.add("hit");
         }
+        div.classList.add("hit");
     }
     div.classList.remove("no-hit");
 }
