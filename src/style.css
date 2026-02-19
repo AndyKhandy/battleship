@@ -16,6 +16,8 @@
     --winner-main-color: blue;
     --winner-border-color: rgb(82, 126, 208);
     --winnner-background-color: rgb(188, 221, 238);
+    --large-font-size: clamp(15px, 0.8rem + 1.1vw,30px);
+    --start-btn-size: clamp(120px, 115px + 2.6vw, 150px);
 }
 
 .flex {
@@ -32,7 +34,6 @@
 
 body {
     text-align: center;
-    height: 100vh;
     background-image: url(".//img/favicon.png");
     background-size: cover;
     justify-content: space-between;
@@ -45,13 +46,13 @@ body {
 }
 
 .title h1 {
-    font-size: 100px;
+    font-size: clamp(50px, 2rem + 3.4vw,100px);
     color: rgba(0, 0, 0, 0.612);
     margin-bottom: 10px;
 }
 
 .title h2{
-    font-size: 25px;
+    font-size: var(--large-font-size);
 }
 
 
@@ -77,8 +78,8 @@ dialog.fire {
 
 .main-body, .main-content {
     justify-content: center;
-    justify-content: center;
-    gap: 45px;
+    flex-direction: column;
+    gap: 75px;
 }
 
 dialog img {
@@ -129,6 +130,8 @@ dialog[open] h1::after{
 .main-content{
     padding: 30px;
     height: 100%;
+    width: 100%;
+    align-items: center;
 }
 
 .boards-section, .start-buttons {
@@ -145,7 +148,7 @@ button, .board div {
     padding: 10px;
     border-radius: 10px;
     text-align: left;
-    width: 75%;
+    width: 50%;
     margin:auto;
     outline: 4px solid rgba(20, 147, 245, 0.47);
     border: 2px solid black;
@@ -174,7 +177,7 @@ button, .board div {
     background-color: white;
     border: 2px solid black;
     padding: 10px;
-    width: 150px;
+    width: var(--start-btn-size);
     border-radius: 10px;
     font-weight: bolder;
     transition: 300ms;
@@ -200,9 +203,21 @@ button, .board div {
     color: rgb(48, 221, 248);
 }
 
+.boards-section{
+    width: min(1200px,100%);
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    margin-top: 1rem;
+    padding: 50px;
+}
+
+.section {
+    position: relative;
+}
+
 .board{
-    width: 30vw;
-    height: 30vw;
+    width: min(600px,100%);
+    height: min(600px,100%);
     border: 2px solid black;
     display: grid;
     grid-template-columns: repeat(10,1fr);
@@ -250,11 +265,11 @@ button, .board div {
 }
 
 .abilities {
+    margin-top: 10px;
     background-size: cover;
     width: 50px;
     height: 50px;
     position: absolute;
-    bottom: -10%;
     visibility: hidden;
 }
 
@@ -272,4 +287,42 @@ button, .board div {
 #water-ability{
     background-image: url("./img/water-ability.webp");
     right: 0px;
+}
+
+@media screen and (max-width: 1000px){
+    .boards-section
+    {
+        margin-top: -20px;
+        grid-template-columns: 1fr;
+        place-items: center;
+    }
+
+    .main-content{
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+
+    .section{
+        width: 75%;
+    }
+
+    .board{
+        width: 100%;
+    }
+
+    .log-attack{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 670px)
+{
+    .boards-section{
+        padding: 50px 0px 0px 0px;
+    }
+
+    .section{
+        width: 100%;
+    }
+
 }
