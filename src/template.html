@@ -28,6 +28,66 @@
       </div>
     </dialog>
 
+    <dialog id="ability-info">
+      <button id="close-ability-info">x</button>
+      <h1>How to play Battleship</h1>
+      <ul>
+        <li>
+          Each player has their own ships placed (user can randomize their ship placement again)
+        </li>
+        <li>
+          Players take turns choosing a coordinate on the opponent’s grid to
+          attack.
+        </li>
+        <li>
+          If the chosen grid contains a ship, it is marked as a hit;
+          otherwise, it is a miss.
+        </li>
+        <li>When all coordinates of a ship are hit, that ship is sunk.</li>
+        <li>The game continues with players alternating turns.</li>
+        <li>
+          The first player to sink all of the opponent’s ships wins the game.
+        </li>
+      </ul>
+      <h1>Information on Abilities</h1>
+      <div class="ability-info-section" id="water-section">
+        <div class="heading flex flex-ali">
+          <div class="img-container flex flex-ali">
+            <img src="img/water-ability.webp" alt="" id="water-ability-img" />
+          </div>
+          <h2 class="ability-name">Moonlight's Shimmer</h2>
+          <button class="more-btn" id="water-ability-more">+</button>
+        </div>
+        <div class="ability-description" id="water-description">
+          <p>
+            Harnessing the moon’s pull over the tides, the Water Tribe briefly
+            illuminates the battlefield. When activated, Moonlight’s Shimmer
+            reveals the exact location of a Fire Nation ship, exposing it to the
+            player for a short moment
+          </p>
+        </div>
+      </div>
+      <div class="ability-info-section" id="fire-section">
+        <div class="heading flex flex-ali">
+          <div class="img-container">
+            <img src="img/fire-ability.webp" alt="" id="fire-ability-img" />
+          </div>
+          <h2 class="ability-name">Sozin's Comet</h2>
+          <button class="more-btn" id="fire-ability-more">+</button>
+        </div>
+
+        <div class="ability-description" id="fire-description">
+          <p>
+            Empowered by the return of the legendary comet, the Fire Nation
+            unleashes overwhelming force. When Sozin’s Comet is activated, the
+            computer launches three consecutive attacks in a single turn,
+            scorching the battlefield.
+          </p>
+        </div>
+        <h1 id="disclaimer">*ALL ABILITIES REQUIRE 4 MISSES BEFORE USE*</h1>
+      </div>
+    </dialog>
+
     <div class="title flex flex-col">
       <h1>BATTLESHIP</h1>
       <h2>INVASION OF THE FIRE NATION</h2>
@@ -40,7 +100,7 @@
             <h2>Water Tribe</h2>
           </div>
           <div class="board" id="water-tribe-board"></div>
-          <button id="water-ability" class="abilities" >🔎</button>
+          <button id="water-ability" class="abilities">🔎</button>
         </div>
 
         <div class="computer-section section">
@@ -48,7 +108,7 @@
             <h2>Fire Nation</h2>
           </div>
           <div class="board" id="fire-nation-board"></div>
-          <button id="fire-ability" class="abilities" ></button>
+          <button id="fire-ability" class="abilities"></button>
         </div>
       </div>
 
@@ -59,6 +119,10 @@
       <div class="start-buttons flex">
         <button id="randomize-board">Randomize Board</button>
         <button id="start-game">Start Game</button>
+      </div>
+
+      <div class="help">
+        <button id="help-button">❓</button>
       </div>
     </div>
   </body>
