@@ -18,8 +18,11 @@
       <div class="main-body flex flex-ali">
         <div class="stats">
           <h2>Stats</h2>
-          <h3 id="player-hits">Player hits connected: 50</h3>
-          <h3 id="computer-hits">Computer hits connected: 60</h3>
+          <h3 id="winner-hits">Player hits connected: 50</h3>
+          <h3 id="loser-hits">Computer hits connected: 60</h3>
+          <h3 id="winner-miss"></h3>
+          <h3 id="loser-miss"></h3>
+
         </div>
         <img
           src="img/ice-fortress-victory.webp"
@@ -51,7 +54,7 @@
       </ul>
       <h1>Information on Abilities</h1>
       <div class="ability-info-section" id="water-section">
-        <div class="heading flex flex-ali">
+        <div class="heading flex flex-ali" data-attribute="water">
           <div class="img-container flex flex-ali">
             <img src="img/water-ability.webp" alt="" id="water-ability-img" />
           </div>
@@ -68,7 +71,7 @@
         </div>
       </div>
       <div class="ability-info-section" id="fire-section">
-        <div class="heading flex flex-ali">
+        <div class="heading flex flex-ali" data-attribute="fire">
           <div class="img-container">
             <img src="img/fire-ability.webp" alt="" id="fire-ability-img" />
           </div>
@@ -100,7 +103,7 @@
             <h2>Water Tribe</h2>
           </div>
           <div class="board" id="water-tribe-board"></div>
-          <button id="water-ability" class="abilities">🔎</button>
+          <button id="water-ability" class="abilities" data-count="4"></button>
         </div>
 
         <div class="computer-section section">
@@ -108,7 +111,7 @@
             <h2>Fire Nation</h2>
           </div>
           <div class="board" id="fire-nation-board"></div>
-          <button id="fire-ability" class="abilities"></button>
+          <button id="fire-ability" class="abilities" data-count="4"></button>
         </div>
       </div>
 

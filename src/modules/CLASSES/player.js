@@ -7,7 +7,7 @@ export default class Player {
     this.shipGridsHit = 0;
     this.numMissedShots = 0;
     this.abilityName = ability;
-    this.abilityMissedShots = 0;
+    this.missedShotsCooldown = 4;
   }
 
   shipSquareHit()
@@ -17,7 +17,7 @@ export default class Player {
 
   canUseAbility()
   {
-    return this.abilityMissedShots == 4;
+    return this.missedShotsCooldown == 0;
   }
 
 }

@@ -198,6 +198,15 @@ li::before{
     font-size: var(--small-font-size);
 }
 
+.heading {
+    cursor:pointer;
+    transition: 400ms;
+}
+
+.heading:hover {
+    transform: translateX(4.4px);
+}
+
 .heading:first-of-type
 {
     margin-bottom: 10px;
@@ -216,7 +225,7 @@ li::before{
 }
 
 #ability-info .ability-name{
-    font-size: 25px;
+    font-size: var(--large-font-size);
 }
 
 .ability-info-section img {
@@ -238,8 +247,6 @@ dialog[open] {
 dialog[open] h1::after{
     width: 100%;
 }
-
-
 
 /*MAIN CONTENT*/
 .main-body, .main-content {
@@ -395,12 +402,24 @@ button, .board div {
     height: 50px;
     position: absolute;
     visibility: hidden;
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    --opacity: 0.5;
 }
 
+.abilities::before {
+  content: attr(data-count);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, var(--opacity));
+  z-index: 0;
+}
 
-.game #fire-ability, .game #water-ability {
+.game .abilities {
     visibility: visible;
-    opacity: 0.5;
 }
 
 #fire-ability{

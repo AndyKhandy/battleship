@@ -6,9 +6,9 @@ import createBoard from "./modules/DOM/createBoard";
 import renderAttack from "./modules/DOM/renderAttack";
 import renderSunkShip from "./modules/DOM/renderSunkShip";
 import { displayWinner } from "./modules/DOM/displayWinner";
-import { displayAbilities } from "./modules/CLASSES/displayAbilities";
+import { displayAbilities } from "./modules/DOM/displayAbilities";
 import displayLogMessage from "./modules/DOM/displayLogMessage";
-import { changeAbilityBtnOpacity } from "./modules/DOM/ability";
+import { changeAbilityBtn } from "./modules/DOM/ability";
 import moonlightAbility from "./modules/DOM/moonlightAbility";
 
 const randomizeBtn = document.querySelector("#randomize-board");
@@ -24,6 +24,8 @@ const computer = new Player("fire-nation", "Sozin's Comet");
 let gameOver = false;
 let gameStart = false;
 let currentPlayer = player;
+//ensure that the triple attack doesn't lower cooldown
+let cometAbility = false;
 
 displayRandomizeBoard(player);
 displayRandomizeBoard(computer);
@@ -52,8 +54,8 @@ function displayRandomizeBoard(playerObject) {
 function useAbility(attacker, button) {
   if (attacker == currentPlayer && attacker.canUseAbility()) {
     activateAbility(attacker.name, attacker.abilityName);
-    changeAbilityBtnOpacity(button, 0);
-    attacker.abilityMissedShots = 0;
+    attacker.missedShotsCooldown = 4;
+    changeAbilityBtn(button, 4);
     return true;
   }
   return false;
@@ -95,16 +97,16 @@ async function attackFunction([x, y], div) {
       }
     } else {
       let button = getButtonName(attacker.name);
-      let opacity = window.getComputedStyle(button).getPropertyValue("opacity");
+      let opacity = window.getComputedStyle(button).getPropertyValue("--opacity");
       attacker.numMissedShots++;
-      attacker.abilityMissedShots++;
-      if (attacker.abilityMissedShots > 4) {
-        attacker.abilityMissedShots = 4;
+      if(!cometAbility)
+      {
+        attacker.missedShotsCooldown--;
       }
-      if (opacity != 1) {
-        changeAbilityBtnOpacity(button, attacker.abilityMissedShots);
+
+      if (opacity != 0) {
+        changeAbilityBtn(button, attacker.missedShotsCooldown);
       }
-      attacker.numMissedShots++;
       await displayLogMessage(attacker.name, false, false, [x, y]);
     }
     //give the type writter time to write out the full sentence
@@ -118,6 +120,7 @@ async function attackFunction([x, y], div) {
 }
 
 async function sozinComet() {
+  cometAbility = true;
   //fire-nation fires 3 total times
   for (let i = 0; i < 2; i++) {
     await computerAttack();
@@ -130,8 +133,9 @@ async function sozinComet() {
   }
   await computerAttack();
   //ensures that the missed shots from sozin's comet doesn't shorten the ability cooldown
-  computer.abilityMissedShots = 0;
-  changeAbilityBtnOpacity(cometAbilityBtn,0);
+  cometAbility = false;
+  computer.missedShotsCooldown = 4;
+  changeAbilityBtn(cometAbilityBtn,4);
 }
 
 function getButtonName(attackerName) {
@@ -207,13 +211,11 @@ function checkWinner() {
     //ex) sunk all ships on player-board (or currentPlayer.gameboard.board) which
     //means switchPlayer() so that the current player is computer
     switchPlayer();
-    let otherShipsHit =
-      currentPlayer == player ? computer.shipGridsHit : player.shipGridsHit;
+    let otherPlayer = currentPlayer == player ? computer : player;
 
+    //current player won the game
     displayWinner(
-      currentPlayer.name,
-      currentPlayer.shipGridsHit,
-      otherShipsHit,
+      currentPlayer,otherPlayer
     );
     gameOver = true;
   }
