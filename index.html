@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Battleship Avatar Edition</title>
+    <link rel="shortcut icon" href="5cd756da145f1156cdf2.jpg" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
+  <script defer src="main.js"></script></head>
+  <body class="flex flex-col flex-ali">
+    <dialog id="game-winner">
+      <h1>VICTORY!</h1>
+      <div class="main-body flex flex-ali">
+        <div class="stats">
+          <h2>Stats</h2>
+          <h3 id="winner-hits">Player hits connected: 50</h3>
+          <h3 id="loser-hits">Computer hits connected: 60</h3>
+          <h3 id="winner-miss"></h3>
+          <h3 id="loser-miss"></h3>
+
+        </div>
+        <img
+          src="651dc9619af7fe9ca4f0.webp"
+          alt="picture of the ice fortress"
+        />
+      </div>
+    </dialog>
+
+    <dialog id="ability-info">
+      <button id="close-ability-info">x</button>
+      <h1>How to play Battleship</h1>
+      <ul>
+        <li>
+          Each player has their own ships placed (user can randomize their ship placement again)
+        </li>
+        <li>
+          Players take turns choosing a coordinate on the opponent’s grid to
+          attack.
+        </li>
+        <li>
+          If the chosen grid contains a ship, it is marked as a hit;
+          otherwise, it is a miss.
+        </li>
+        <li>When all coordinates of a ship are hit, that ship is sunk.</li>
+        <li>The game continues with players alternating turns.</li>
+        <li>
+          The first player to sink all of the opponent’s ships wins the game.
+        </li>
+      </ul>
+      <h1>Information on Abilities</h1>
+      <div class="ability-info-section" id="water-section">
+        <div class="heading flex flex-ali" data-attribute="water">
+          <div class="img-container flex flex-ali">
+            <img src="c8a79ff840e0602361ac.webp" alt="" id="water-ability-img" />
+          </div>
+          <h2 class="ability-name">Moonlight's Shimmer</h2>
+          <button class="more-btn" id="water-ability-more">+</button>
+        </div>
+        <div class="ability-description" id="water-description">
+          <p>
+            Harnessing the moon’s pull over the tides, the Water Tribe briefly
+            illuminates the battlefield. When activated, Moonlight’s Shimmer
+            reveals the exact location of a Fire Nation ship, exposing it to the
+            player for a short moment
+          </p>
+        </div>
+      </div>
+      <div class="ability-info-section" id="fire-section">
+        <div class="heading flex flex-ali" data-attribute="fire">
+          <div class="img-container">
+            <img src="45e862fe60e2482a9189.webp" alt="" id="fire-ability-img" />
+          </div>
+          <h2 class="ability-name">Sozin's Comet</h2>
+          <button class="more-btn" id="fire-ability-more">+</button>
+        </div>
+
+        <div class="ability-description" id="fire-description">
+          <p>
+            Empowered by the return of the legendary comet, the Fire Nation
+            unleashes overwhelming force. When Sozin’s Comet is activated, the
+            computer launches three consecutive attacks in a single turn,
+            scorching the battlefield.
+          </p>
+        </div>
+        <h1 id="disclaimer">*ALL ABILITIES REQUIRE 4 MISSES BEFORE USE*</h1>
+      </div>
+    </dialog>
+
+    <div class="title flex flex-col">
+      <h1>BATTLESHIP</h1>
+      <h2>INVASION OF THE FIRE NATION</h2>
+    </div>
+
+    <div class="main-content flex">
+      <div class="boards-section">
+        <div class="player-section section">
+          <div id="player-name" class="name">
+            <h2>Water Tribe</h2>
+          </div>
+          <div class="board" id="water-tribe-board"></div>
+          <button id="water-ability" class="abilities" data-count="4"></button>
+        </div>
+
+        <div class="computer-section section">
+          <div id="computer-name" class="name">
+            <h2>Fire Nation</h2>
+          </div>
+          <div class="board" id="fire-nation-board"></div>
+          <button id="fire-ability" class="abilities" data-count="4"></button>
+        </div>
+      </div>
+
+      <div class="log-attack">
+        <p>Protect your land! Water Nation's Turn</p>
+      </div>
+
+      <div class="start-buttons flex">
+        <button id="randomize-board">Randomize Board</button>
+        <button id="start-game">Start Game</button>
+      </div>
+
+      <div class="help">
+        <button id="help-button">❓</button>
+      </div>
+    </div>
+  </body>
+</html>
