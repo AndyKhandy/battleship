@@ -90,7 +90,7 @@ async function attackFunction([x, y], div) {
       let shipSunkCoords = currentPlayer.gameboard.shipSunkAtCoords([x, y]);
       if (shipSunkCoords != null) {
         renderSunkShip(currentPlayer.name, shipSunkCoords);
-        await displayLogMessage(attacker, true, true, [x, y]);
+        await displayLogMessage(attacker.name, true, true, [x, y]);
         checkWinner();
       } else {
         await displayLogMessage(attacker.name, true, false, [x, y]);
